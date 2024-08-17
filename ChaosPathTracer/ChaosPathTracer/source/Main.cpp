@@ -10,19 +10,37 @@ int main(int argc, char** argv)
 		return 1;
 	}
 
-	std::string sceneFile = argv[1];
-	std::unique_ptr<Scene> scene = std::make_unique<Scene>(sceneFile);
+	try
+	{
+		std::string sceneFile = argv[1];
+		std::unique_ptr<Scene> scene = std::make_unique<Scene>(sceneFile);
 
-	Renderer renderer(*scene);
+		Renderer renderer(*scene);
 
-	auto start = std::chrono::high_resolution_clock::now();
+		auto start = std::chrono::high_resolution_clock::now();
 
-	renderer.renderImage();
+		renderer.renderImage();
 
-	auto end = std::chrono::high_resolution_clock::now();
+		auto end = std::chrono::high_resolution_clock::now();
 
-	std::chrono::duration<double> duration = end - start;
-	std::cout << scene->settings.sceneName + " rendering time: " << duration.count() << " seconds" << std::endl;
+		std::chrono::duration<double> duration = end - start;
+		std::cout << scene->settings.sceneName + " rendering time: " << duration.count() << " seconds" << std::endl;
+	} 
+	catch (const std::runtime_error& e) 
+	{
+		std::cerr << "Runtime error: " << e.what() << std::endl;
+		return 1;
+	} 
+	catch (const std::exception& e) 
+	{
+		std::cerr << "Exception: " << e.what() << std::endl;
+		return 1;
+	} 
+	catch (...) 
+	{
+		std::cerr << "An unknown error occurred." << std::endl;
+		return 1;
+	}
 
 	return 0;
 }

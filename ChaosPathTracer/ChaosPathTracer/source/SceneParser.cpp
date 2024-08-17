@@ -4,6 +4,7 @@
 #include <iostream>
 #include <map>
 #include <vector>
+#include <sstream>
 
 #include "Light.hpp"
 #include "Material.hpp"
@@ -79,19 +80,29 @@ rapidjson::Document SceneParser::getJsonDocument(const std::string& fileName)
 	using namespace rapidjson;
 
 	std::ifstream ifs(fileName);
-	assert(ifs.is_open());
+	if (!ifs.is_open()) 
+	{
+		std::ostringstream oss;
+		oss << "Failed to open file: " << fileName;
+		throw std::runtime_error(oss.str());
+	}
 
 	IStreamWrapper isw(ifs);
 	Document doc;
 	doc.ParseStream(isw);
 
-	if (doc.HasParseError())
+	if (doc.HasParseError()) 
 	{
-		std::cout << "Error : " << doc.GetParseError() << '\n';
-		std::cout << "Offset : " << doc.GetErrorOffset() << '\n';
-		assert(false);
+		std::ostringstream oss;
+		oss << "JSON parse error: " << doc.GetParseError() 
+			<< " (Offset: " << doc.GetErrorOffset() << ")";
+		throw std::runtime_error(oss.str());
 	}
-	assert(doc.IsObject());
+
+	if (!doc.IsObject()) 
+	{
+		throw std::runtime_error("JSON document is not an object");
+	}
 
 	return doc; // RVO
 }
