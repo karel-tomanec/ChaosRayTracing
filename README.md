@@ -1,6 +1,10 @@
 # ChaosRayTracing
 
-A simple CPU path tracer created as part of the Chaos Ray Tracing course.
+A simple CPU path tracer created as part of the [Chaos](https://www.chaos.com/) Ray Tracing course.
+
+## Example
+
+<img src="images/cornell_box.png" alt="Cornell Box" width="500"/>
 
 ## Features
 
