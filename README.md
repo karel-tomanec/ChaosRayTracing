@@ -4,7 +4,9 @@ A simple CPU path tracer created as part of the [Chaos](https://www.chaos.com/) 
 
 ## Example
 
-<img src="images/cornell_box.png" alt="Cornell Box" width="500"/>
+<p align="center">
+  <img src="images/cornell_box.png" alt="Cornell Box" width="500"/>
+</p>
 
 ## Features
 
