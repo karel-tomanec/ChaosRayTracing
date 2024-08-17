@@ -7,8 +7,8 @@
 			"width": 1080,
 			"height": 1080,
 			"bucket_size": 24,
-			"sample_count": 1,
-			"trace_depth": 1
+			"sample_count": 1024,
+			"trace_depth": 5
 		}
 	},
 	
